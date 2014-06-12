@@ -1,0 +1,6 @@
+keep java.beans.Introspector
+keep java.beans.IntrospectionException
+keep java.beans.BeanDescriptor
+keep java.beans.FeatureDescriptor
+keep java.beans.BeanInfo
+keep java.beans.*BeanInfo*

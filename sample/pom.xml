@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.kedzie.drools</groupId>
+    <artifactId>sample</artifactId>
+	<version>6.0.1.Final</version>
+    <packaging>apk</packaging>
+
+    <name>Drools Android Sample</name>
+
+	<properties>
+		<drools.version>6.0.1.Final</drools.version>	
+	</properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>android</groupId>
+            <artifactId>android</artifactId>
+            <version>4.4.2_r3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core-android</artifactId>
+            <version>${drools.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.xml.bind</groupId>
+            		<artifactId>jaxb-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.xml.bind</groupId>
+            		<artifactId>jaxb-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.xml.bind</groupId>
+            		<artifactId>jaxb-xjc</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xpp</groupId>
+            		<artifactId>xpp_min</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xmlpull</groupId>
+            		<artifactId>xmlpull</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.antlr</groupId>
+            		<artifactId>ST4</artifactId>
+				</exclusion>
+				<exlusion>
+  					<groupId>org.osgi</groupId>
+      				<artifactId>org.osgi.core</artifactId>
+    			</exclusion>
+    			<exclusion>
+      				<groupId>org.osgi</groupId>
+      				<artifactId>org.osgi.compendium</artifactId>
+    			</exclusion>
+				<exclusion>
+      				<groupId>com.thoughtworks.xstream</groupId>
+      				<artifactId>xstream</artifactId>
+    			</exclusion>
+				<exclusion>
+				  <groupId>javax.xml.stream</groupId>
+				  <artifactId>stax-api</artifactId>
+    			</exclusion>
+				<exclusion>
+				  <groupId>stax</groupId>
+				  <artifactId>stax-api</artifactId>
+				</exclusion>
+				<exclusion>
+      				<groupId>org.slf4j</groupId>
+      				<artifactId>slf4j-api</artifactId>
+    			</exclusion>				
+			</exclusions>
+        </dependency>
+
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-android</artifactId>
+			<version>1.6.1-RC1</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.harmony</groupId>
+		  <artifactId>beans-android</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+    </dependencies>
+
+    <build>
+		<sourceDirectory>${basedir}/src</sourceDirectory>
+        <directory>${basedir}/bin</directory>
+        <outputDirectory>${basedir}/bin/classes</outputDirectory>
+        <finalName>${project.artifactId}</finalName>
+		
+        <plugins>
+			<plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+                    <version>3.8.2</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <sdk>
+                            <platform>19</platform>
+                        </sdk>
+                        <manifestVersionName/>
+                        <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
+                        <manifest>
+                            <debuggable>true</debuggable>
+                        </manifest>
+                        <attachSources>true</attachSources>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>manifest</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>manifest-update</goal>
+                            </goals>
+                        </execution>
+				</executions>
+			</plugin>
+        </plugins>
+    </build>
+
+	<repositories>
+	   <repository>
+            <id>third.party.closed.source.repo</id>
+            <url>file://${basedir}/../maven_repo_3rd_party</url>
+        </repository>
+    </repositories>
+</project>
+

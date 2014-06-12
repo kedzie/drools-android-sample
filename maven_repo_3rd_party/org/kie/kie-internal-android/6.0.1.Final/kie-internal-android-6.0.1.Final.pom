@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.kie</groupId>
+    <artifactId>kie-api-parent</artifactId>
+    <version>6.0.1.Final</version>
+  </parent>
+
+  <artifactId>kie-internal-android</artifactId>
+  <packaging>bundle</packaging><!-- bundle = jar + OSGi metadata -->
+
+  <name>KIE Internal Android</name>
+  <description>The Drools and jBPM internal API which is NOT backwards compatible between releases.</description>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>org.kie.internalapi</Bundle-SymbolicName>
+            <Import-Package>
+              com.sun.tools.xjc;resolution:=optional,
+              javax.enterprise.*;resolution:=optional,
+              javax.inject.*;resolution:=optional,
+              org.drools.compiler.builder.impl,
+              org.drools.core.command.impl,
+              org.drools.core.concurrent,
+              org.drools.core.impl,
+              org.drools.core.io.impl,
+              org.drools.decisiontable;resolution:=optional,
+              org.jbpm.process.builder;resolution:=optional,
+              org.jbpm.runtime.manager.impl;resolution:=optional,
+              *
+            </Import-Package>
+            <Export-Package>
+              org.kie.internal.*
+            </Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <scope>provided</scope><!-- HACK for OSGi: should be <optional>true</optional> instead -->
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-xjc</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+</project>

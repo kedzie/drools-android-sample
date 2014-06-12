@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.kie</groupId>
+  <artifactId>kie-internal-android</artifactId>
+  <versioning>
+    <release>6.0.1.Final</release>
+    <versions>
+      <version>6.0.1.Final</version>
+    </versions>
+    <lastUpdated>20140612195401</lastUpdated>
+  </versioning>
+</metadata>
