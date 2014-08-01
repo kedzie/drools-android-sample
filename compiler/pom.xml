@@ -4,16 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.kedzie.drools</groupId>
-    <artifactId>compiler</artifactId>
-    <version>6.0.1.Final</version>
+	<parent>
+		<groupId>com.github.kedzie.drools</groupId>
+		<artifactId>drools-android-parent</artifactId>
+		<version>6.0.1.Final</version>
+        <relativePath>../</relativePath>
+	</parent>
 
-    <properties>
-        <drools.version>6.0.1.Final</drools.version>
-    </properties>
+    <artifactId>compiler</artifactId>
 
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.kedzie.drools</groupId>
+            <artifactId>helloworld</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-core</artifactId>
@@ -44,30 +50,19 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.github.kedzie.drools.Compiler</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>jboss-public-repository-group</id>
-            <name>JBoss Public Repository Group</name>
-            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-            <layout>default</layout>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>

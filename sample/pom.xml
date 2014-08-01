@@ -4,16 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.github.kedzie.drools</groupId>
+	<parent>
+		<groupId>com.github.kedzie.drools</groupId>
+		<artifactId>drools-android-parent</artifactId>
+		<version>6.0.1.Final</version>
+        <relativePath>../</relativePath>
+	</parent>
+
     <artifactId>sample</artifactId>
-	<version>6.0.1.Final</version>
     <packaging>apk</packaging>
 
     <name>Drools Android Sample</name>
-
-	<properties>
-		<drools.version>6.0.1.Final</drools.version>	
-	</properties>
 
     <dependencies>
         <dependency>
@@ -21,6 +22,22 @@
             <artifactId>android</artifactId>
             <version>4.4.2_r3</version>
             <scope>provided</scope>
+        </dependency>
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-android</artifactId>
+			<version>1.6.1-RC1</version>
+		</dependency>
+        <dependency>
+            <groupId>com.github.kedzie.drools</groupId>
+            <artifactId>helloworld</artifactId>
+            <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.drools</groupId>
@@ -51,7 +68,7 @@
 					<groupId>org.antlr</groupId>
             		<artifactId>ST4</artifactId>
 				</exclusion>
-				<exlusion>
+				<exclusion>
   					<groupId>org.osgi</groupId>
       				<artifactId>org.osgi.core</artifactId>
     			</exclusion>
@@ -78,11 +95,7 @@
 			</exclusions>
         </dependency>
 
-		<dependency>
-		  <groupId>org.slf4j</groupId>
-		  <artifactId>slf4j-android</artifactId>
-			<version>1.6.1-RC1</version>
-		</dependency>
+		
 		<dependency>
 		  <groupId>org.apache.harmony</groupId>
 		  <artifactId>beans-android</artifactId>
@@ -97,14 +110,6 @@
         <finalName>${project.artifactId}</finalName>
 		
         <plugins>
-			<plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
             <plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
