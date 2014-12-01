@@ -26,7 +26,7 @@
 		<dependency>
 		  <groupId>org.slf4j</groupId>
 		  <artifactId>slf4j-android</artifactId>
-			<version>1.6.1-RC1</version>
+			<version>1.7.7</version>
 		</dependency>
         <dependency>
             <groupId>com.github.kedzie.drools</groupId>
@@ -94,8 +94,6 @@
     			</exclusion>				
 			</exclusions>
         </dependency>
-
-		
 		<dependency>
 		  <groupId>org.apache.harmony</groupId>
 		  <artifactId>beans-android</artifactId>
@@ -110,6 +108,39 @@
         <finalName>${project.artifactId}</finalName>
 		
         <plugins>
+			<plugin>
+				<groupId>com.github.kedzie.drools</groupId>
+				<artifactId>drools-compiler-plugin</artifactId>
+				<version>6.0.1.Final</version>
+				<configuration>
+					<ruleFiles>
+						<ruleFile>org/drools/examples/helloworld/HelloWorld.drl</ruleFile>
+					</ruleFiles>
+					<outputDirectory>${basedir}/res/raw</outputDirectory>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.github.kedzie.drools</groupId>
+						<artifactId>helloworld</artifactId>
+						<version>1.0</version>
+						<exclusions>
+							<exclusion>
+								<groupId>org.slf4j</groupId>
+								<artifactId>slf4j-api</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>compile-rules</id>
+						<goals>
+							<goal>compile-rules</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
+			</plugin>
             <plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
@@ -125,6 +156,9 @@
                             <debuggable>true</debuggable>
                         </manifest>
                         <attachSources>true</attachSources>
+						<dex>
+							<coreLibrary>true</coreLibrary>
+						</dex>
                     </configuration>
                     <executions>
                         <execution>

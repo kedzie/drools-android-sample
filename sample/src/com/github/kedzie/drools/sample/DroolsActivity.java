@@ -14,14 +14,18 @@ import org.kie.api.definition.rule.Rule;
 import org.kie.api.event.rule.DebugAgendaEventListener;
 import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.internal.KnowledgeBase;
+import org.kie.internal.KnowledgeBaseFactory;
 import org.kie.internal.definition.KnowledgePackage;
 import org.kie.internal.runtime.StatefulKnowledgeSession;
+import org.kie.internal.runtime.StatelessKnowledgeSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class DroolsActivity extends Activity {
 
@@ -35,9 +39,7 @@ public class DroolsActivity extends Activity {
         //Initialize android context and set system properties
         DroolsAndroidContext.setContext(this);
         //load serialized KnowledgePackages from res/raw/helloworld.pkg
-//        ;
-//        new LoadRulesTask().execute(getClass().getResourceAsStream("META-INF/HelloWorldKB/kbase.cache"));
-        new LoadRulesTask().execute(getResources().openRawResource(R.raw.helloworld_kbase));
+        new LoadRulesTask().execute(getResources().openRawResource(R.raw.org_drools_examples_helloworld));
 
         RelativeLayout layout = new RelativeLayout(this);
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -70,23 +72,16 @@ public class DroolsActivity extends Activity {
                 logger.debug("Loading knowledge base");
 
                 dois = new DroolsObjectInputStream(params[0]);
-                final KnowledgeBase kbase = (KnowledgeBase)dois.readObject();
-//                final Collection<KnowledgePackage> pkgs = (Collection<KnowledgePackage>) dois.readObject();
-//                final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-//                kbase.addKnowledgePackages(pkgs);
-
-//               System.setProperty("java.version", "1.6");
-//               System.setProperty("mvel2.disable.jit", "true");
-//               OptimizerFactory.setDefaultOptimizer("reflective");
-
+                final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+                List<KnowledgePackage> pkgs = new ArrayList<KnowledgePackage>();
+                pkgs.add((KnowledgePackage)dois.readObject());
+                kbase.addKnowledgePackages(pkgs);
                 for(KnowledgePackage pkg : kbase.getKnowledgePackages()) {
-
-                        logger.debug("Loaded rule package: " + pkg.toString());
-                        for (Rule rule : pkg.getRules()) {
-                            logger.debug("Rule: " + rule);
-                        }
+                    logger.debug("Loaded rule package: " + pkg.toString());
+                    for (Rule rule : pkg.getRules()) {
+                        logger.debug("Rule: " + rule);
+                    }
                 }
-
                 return kbase;
             }catch(Exception e) {
                 logger.error("Drools exception", e);
@@ -121,7 +116,7 @@ public class DroolsActivity extends Activity {
             try {
                 logger.debug("Firing rules");
 
-                final StatefulKnowledgeSession ksession = mKnowledgeBase.newStatefulKnowledgeSession();
+                final StatelessKnowledgeSession ksession = mKnowledgeBase.newStatelessKnowledgeSession();
 
                 ksession.addEventListener( new DebugAgendaEventListener() );
                 ksession.addEventListener( new DebugRuleRuntimeEventListener() );
@@ -129,11 +124,9 @@ public class DroolsActivity extends Activity {
                 ksession.setGlobal("list", new ArrayList<Object>());
 
                 final HelloWorldExample.Message message = new HelloWorldExample.Message();
-                message.setMessage( "Hello World" );
-                message.setStatus( HelloWorldExample.Message.HELLO );
-                ksession.insert(message);
-                ksession.fireAllRules();
-                ksession.dispose();
+                message.setMessage("Hello World");
+                message.setStatus(HelloWorldExample.Message.HELLO);
+                ksession.execute(message);
             }catch(Exception e) {
                 logger.error("Drools exception", e);
             }
@@ -145,7 +138,4 @@ public class DroolsActivity extends Activity {
             DroolsActivity.this.setProgressBarIndeterminateVisibility(false);
         }
     }
-
-
-
 }
