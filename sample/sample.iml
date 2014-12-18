@@ -36,6 +36,7 @@
     <orderEntry type="library" name="Maven: org.kie:kie-api:6.0.1.Final" level="project" />
     <orderEntry type="module" module-name="drools-core-android" />
     <orderEntry type="library" name="Maven: com.android:dex:1.7" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code:openbeans:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.mvel:mvel2:2.1.8.Final" level="project" />
     <orderEntry type="library" name="Maven: org.kie:kie-internal-android:6.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: org.apache.harmony:beans-android:1.0.0" level="project" />
