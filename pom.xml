@@ -9,7 +9,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>rules</module>
 		<module>compiler</module>
 		<module>sample</module>
 	</modules>

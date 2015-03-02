@@ -11,18 +11,21 @@
     </content>
     <orderEntry type="jdk" jdkName="Oracle 1.6" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.drools:drools-core:6.0.1.Final" level="project" />
+    <orderEntry type="module" module-name="drools-core-android" />
+    <orderEntry type="library" name="Maven: com.google.code:openbeans:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.mvel:mvel2:2.1.8.Final" level="project" />
     <orderEntry type="library" name="Maven: org.kie:kie-api:6.0.1.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.kie:kie-internal:6.0.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.kie:kie-internal-android:6.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.2" level="project" />
-    <orderEntry type="library" name="Maven: org.drools:drools-compiler:6.0.1.Final" level="project" />
+    <orderEntry type="module" module-name="drools-compiler" />
     <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jdt.core.compiler:ecj:3.7.2" level="project" />
     <orderEntry type="library" name="Maven: com.thoughtworks.xstream:xstream:1.4.3" level="project" />
     <orderEntry type="library" name="Maven: xmlpull:xmlpull:1.1.3.1" level="project" />
     <orderEntry type="library" name="Maven: xpp3:xpp3_min:1.1.4c" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:2.5.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.codehaus.janino:janino:2.7.6" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.codehaus.janino:commons-compiler:2.7.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-api:3.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-model:3.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-artifact:3.2.3" level="project" />
